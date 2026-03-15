@@ -11,10 +11,10 @@ import java.util.List;
 
 
 public class ArquivoAlunos implements PersistenciaAlunos {
-    private HashMap<Integer, Aluno> alunos;
-    private List<Aluno> lista = new ArrayList<>(alunos.values());
+    private HashMap<Integer, Aluno> aluno = new HashMap<>();
     @Override
     public void salvarNoArquivo(Aluno[] alunos, int total) {
+        List<Aluno> lista = new ArrayList<>(aluno.values());
         Collections.sort(lista, Comparator.comparing(Aluno::getNome));
     }
     @Override
