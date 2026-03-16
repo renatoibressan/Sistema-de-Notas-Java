@@ -55,12 +55,12 @@ public class SistemaNotas {
                             try {
                                 a.registrarNotas(nota);
                             } catch (NotaInvalidaException ee) {
-                                System.out.println("\n" + ee.getMessage() + "\n");
+                                System.out.println("\n" + ee.getMessage());
                             }
                         }
                         System.out.println("\nNotas de " + a.getNome() + " cadastradas com sucesso!");
                     } catch (AlunoNaoEncontradoException e) {
-                        System.out.println("\n" + e.getMessage() + "\n");
+                        System.out.println("\n" + e.getMessage());
                     }
                     break;
                 case 3:
@@ -84,10 +84,10 @@ public class SistemaNotas {
                             media = a.calcularMedia();
                             System.out.println("Media: " + String.format("%.2f", media));
                         } catch (DivisaoPorZeroException ee) {
-                            System.out.println("\n" + ee.getMessage() + "\n");
+                            System.out.println("\n" + ee.getMessage());
                         }
                     } catch (AlunoNaoEncontradoException e) {
-                        System.out.println("\n" + e.getMessage() + "\n");
+                        System.out.println("\n" + e.getMessage());
                     }
                     break;
                 // case 5:
@@ -101,7 +101,7 @@ public class SistemaNotas {
                         System.out.print(c);
                         Thread.sleep(150);
                     }
-                    System.out.print("\n\n");
+                    System.out.println("\n");
                     break;
                 default:
                     System.out.println("\nOpcao invalida!\n");

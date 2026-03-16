@@ -42,7 +42,7 @@ public class GerenciadorAlunos {
     //         try {
     //             aluno.registrarNotas(notas);
     //         } catch (NotaInvalidaException e) {
-    //             System.out.println("\n" + e.getMessage() + "\n");
+    //             System.out.println("\n" + e.getMessage());
     //         }
     //     }
     // }
@@ -65,7 +65,7 @@ public class GerenciadorAlunos {
                 media = aluno.calcularMedia();
                 System.out.println("\nMedia: " + String.format("%.2f", media));
             } catch (DivisaoPorZeroException e) {
-                 System.out.println("\n" + e.getMessage() + "\n");
+                 System.out.println("\n" + e.getMessage());
             }
         }
     }
