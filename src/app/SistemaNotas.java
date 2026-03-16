@@ -18,7 +18,7 @@ public class SistemaNotas {
         int opcao = -1, matricula = 0;
         double nota = 10.1, media;
         String nomeTeste;
-        String nomeArquivo = "alunos_" + System.currentTimeMillis() + ".txt";
+        String nomeArquivo = "alunos.txt";
         String load = "...";
         gerenciador = new GerenciadorAlunos(matricula);
         System.out.println("\n====== SISTEMA GERENCIADOR DE NOTAS E ALUNOS ======\n");
@@ -98,6 +98,7 @@ public class SistemaNotas {
                     arquivo = new ArquivoAlunos(nomeArquivo);
                     try {
                         arquivo.carregarDeArquivo(gerenciador);
+                        System.out.println("\nAlunos carregados com sucesso!");
                     } catch (IOException e) {
                         System.out.println("\nNao foi possivel ler do arquivo!");
                     }
