@@ -26,7 +26,7 @@ public class SistemaNotas {
         PersistenciaAlunos arquivoMenu = new ArquivoAlunos(nomeArquivo);
         File file = new File(nomeArquivo);
         if (file.exists() && file.length() > 0) {
-            System.out.print("Deseja carregar os alunos do arquivo 'alunos.txt'? (S/N): ");
+            System.out.print("\nDeseja carregar os alunos do arquivo 'alunos.txt'? (S/N): ");
             resposta = sc.nextLine();
             if (resposta.equalsIgnoreCase("s")) {
                 try {
@@ -138,7 +138,7 @@ public class SistemaNotas {
                     System.out.print("\n");
             }
         }
-        System.out.print("\nDeseja salvar os alunos no arquivo 'alunos.txt' antes de sair? (S/N): ");
+        System.out.print("Deseja salvar os alunos no arquivo 'alunos.txt' antes de sair? (S/N): ");
         sc.nextLine();
         resposta = sc.nextLine();
         if (resposta.equalsIgnoreCase("s")) {
