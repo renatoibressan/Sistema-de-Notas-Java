@@ -1,8 +1,10 @@
 package io;
+import service.GerenciadorAlunos;
 import exceptions.ArquivoInvalidoException;
-import model.Aluno;
+import java.io.*;
+
 
 public interface PersistenciaAlunos {
-    public void salvarNoArquivo(Aluno[] alunos, int total);
-    public Aluno[] carregarDeArquivo() throws ArquivoInvalidoException;
+    public void salvarNoArquivo(GerenciadorAlunos gerenciador) throws IOException;
+    public void carregarDeArquivo(GerenciadorAlunos gerenciadorAlunos) throws IOException, ArquivoInvalidoException;
 }

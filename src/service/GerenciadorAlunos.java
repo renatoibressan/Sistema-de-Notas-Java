@@ -2,24 +2,31 @@ package service;
 import model.Aluno;
 import exceptions.AlunoNaoEncontradoException;
 import exceptions.DivisaoPorZeroException;
-import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.time.LocalDate;
 
 public class GerenciadorAlunos {
-    private HashMap<Integer, Aluno> alunos;
+    private TreeMap<Integer, Aluno> alunos;
     private int ultimaMatricula;
-    private int anoAtual;
-    private double media;
     public GerenciadorAlunos(int ultimaMatriculaInicial) {
-        alunos = new HashMap<>();
+        alunos = new TreeMap<>();
         ultimaMatricula = ultimaMatriculaInicial;
-        anoAtual = LocalDate.now().getYear();
+    }
+    public TreeMap<Integer, Aluno> getAlunos() {
+        return alunos;
+    }
+    public int getUltimaMatricula() {
+        return ultimaMatricula;
+    }
+    public void adicionarAluno(Aluno aluno) {
+        alunos.put(aluno.getMatricula(), aluno);
     }
     public int gerarMatricula() {
         int contador, novaMatricula;
+        int anoAtual = LocalDate.now().getYear();
         if (ultimaMatricula == 0) contador = 1;
         else {
             contador = ultimaMatricula % 100000;
@@ -62,7 +69,7 @@ public class GerenciadorAlunos {
                 System.out.print(String.format("%.2f", nota) + " ");
             }
             try {
-                media = aluno.calcularMedia();
+                double media = aluno.calcularMedia();
                 System.out.println("\nMedia: " + String.format("%.2f", media));
             } catch (DivisaoPorZeroException e) {
                  System.out.println("\n" + e.getMessage());

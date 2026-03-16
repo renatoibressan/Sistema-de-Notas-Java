@@ -1,13 +1,14 @@
 package app;
 import model.Aluno;
 import service.GerenciadorAlunos;
-// import io.*;
+import io.*;
 import exceptions.AlunoNaoEncontradoException;
 import exceptions.DivisaoPorZeroException;
 import exceptions.NotaInvalidaException;
 // import exceptions.ArquivoInvalidoException;
 import java.util.Scanner;
 import java.util.Locale;
+import java.io.IOException;
 
 public class SistemaNotas {
     public static void limparTela() {
@@ -18,7 +19,7 @@ public class SistemaNotas {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
         GerenciadorAlunos gerenciador;
-        // PersistenciaAlunos arq = new ArquivoAlunos();
+        PersistenciaAlunos arquivo;
         int opcao = -1, matricula = 0;
         double nota = 10.1, media;
         String nomeTeste;
@@ -57,7 +58,7 @@ public class SistemaNotas {
                                 System.out.println("\n" + ee.getMessage());
                             }
                         }
-                        System.out.println("\nNotas de " + a.getNome() + " cadastradas com sucesso!");
+                        System.out.println("\nNotas de " + a.getNome() + " registradas com sucesso!");
                     } catch (AlunoNaoEncontradoException e) {
                         System.out.println("\n" + e.getMessage());
                     }
@@ -89,8 +90,18 @@ public class SistemaNotas {
                         System.out.println("\n" + e.getMessage());
                     }
                     break;
-                // case 5:
-                //     break;
+                case 5:
+                    System.out.print("\nInsira um nome para o arquivo: ");
+                    sc.nextLine();
+                    nomeTeste = sc.nextLine();
+                    arquivo = new ArquivoAlunos(nomeTeste);
+                    try {
+                        arquivo.salvarNoArquivo(gerenciador);
+                        System.out.println("\nArquivo criado com sucesso!");
+                    } catch (IOException e) {
+                        System.out.println("\nNao foi possivel escrever no arquivo!");
+                    }
+                    break;
                 // case 6:
                 //     break;
                 case 0:
