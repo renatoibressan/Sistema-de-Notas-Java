@@ -4,6 +4,8 @@ import service.GerenciadorAlunos;
 // import io.*;
 import exceptions.AlunoNaoEncontradoException;
 import exceptions.DivisaoPorZeroException;
+import exceptions.NotaInvalidaException;
+
 // import exceptions.ArquivoInvalidoException;
 import java.util.Scanner;
 import java.util.Locale;
@@ -16,7 +18,6 @@ public class SistemaNotas {
     public static void main(String[] args) throws InterruptedException {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
-        Aluno a;
         GerenciadorAlunos gerenciador;
         // PersistenciaAlunos arq = new ArquivoAlunos();
         int opcao = -1, matricula = 0;
@@ -24,6 +25,7 @@ public class SistemaNotas {
         String nomeTeste;
         String load = "...";
         gerenciador = new GerenciadorAlunos(matricula);
+        limparTela();
         System.out.println("\n====== SISTEMA GERENCIADOR DE NOTAS E ALUNOS ======\n");
         System.out.println("Desenvolvido por: Renato Ikeda Bressan");
         while (opcao != 0) {
@@ -42,13 +44,18 @@ public class SistemaNotas {
                     System.out.print("\nEntre com uma matricula para procura do aluno: ");
                     matricula = sc.nextInt();
                     try {
+                        Aluno a = gerenciador.buscarAluno(matricula);
                         while (true) {
-                            System.out.print("Insira uma nota de 0 a 10 (ou -1 para encerrar o processo): ");
+                            System.out.print("\nInsira uma nota de 0 a 10 (ou -1 para encerrar o processo): ");
                             nota = sc.nextDouble();
                             if (nota == -1.0) {
                                 break;
                             }
-                            gerenciador.registrarNotas(matricula, nota);
+                            try {
+                                a.registrarNotas(nota);
+                            } catch (NotaInvalidaException ee) {
+                                System.out.println("\n" + ee.getMessage() + "\n");
+                            }
                         }
                     } catch (AlunoNaoEncontradoException e) {
                         System.out.println("\n" + e.getMessage() + "\n");
@@ -62,8 +69,8 @@ public class SistemaNotas {
                     System.out.print("\nEntre com uma matricula para procura do aluno: ");
                     matricula = sc.nextInt();
                     try {
-                        a = gerenciador.buscarAluno(matricula);
-                        System.out.println("Aluno encontrado!\n");
+                        Aluno a = gerenciador.buscarAluno(matricula);
+                        System.out.println("\nAluno encontrado!\n");
                         System.out.println("Dados do aluno:\nNome: " + a.getNome());
                         System.out.println("Matricula: " + a.getMatricula());
                         System.out.println("Notas:");
@@ -92,7 +99,7 @@ public class SistemaNotas {
                         System.out.print(c);
                         Thread.sleep(150);
                     }
-                    System.out.print("\n");
+                    System.out.print("\n\n");
                     break;
                 default:
                     System.out.println("\nOpcao invalida!\n");

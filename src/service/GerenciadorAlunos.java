@@ -1,7 +1,6 @@
 package service;
 import model.Aluno;
 import exceptions.AlunoNaoEncontradoException;
-import exceptions.NotaInvalidaException;
 import exceptions.DivisaoPorZeroException;
 import java.util.HashMap;
 import java.util.List;
@@ -35,15 +34,17 @@ public class GerenciadorAlunos {
         Aluno aluno = new Aluno(nome, matricula);
         alunos.put(matricula, aluno);
     }
-    public void registrarNotas(int matricula, double... notas) throws AlunoNaoEncontradoException {
-        Aluno aluno = alunos.get(matricula);
-        if (aluno == null) throw new AlunoNaoEncontradoException("Aluno nao encontrado!");
-        try {
-            aluno.registrarNotas(notas);
-        } catch (NotaInvalidaException e) {
-            System.out.println("\n" + e.getMessage() + "\n");
-        }
-    }
+    // public void registrarNotas(int matricula, double... notas) throws AlunoNaoEncontradoException {
+    //     Aluno aluno = alunos.get(matricula);
+    //     if (aluno == null) throw new AlunoNaoEncontradoException("Aluno nao encontrado!");
+    //     else {
+    //         try {
+    //             aluno.registrarNotas(notas);
+    //         } catch (NotaInvalidaException e) {
+    //             System.out.println("\n" + e.getMessage() + "\n");
+    //         }
+    //     }
+    // }
     public Aluno buscarAluno(int matricula) throws AlunoNaoEncontradoException {
         Aluno aluno = alunos.get(matricula);
         if (aluno == null) throw new AlunoNaoEncontradoException("Aluno nao encontrado!");
