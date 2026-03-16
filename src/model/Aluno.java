@@ -19,6 +19,9 @@ public class Aluno implements Comparable<Aluno> {
     public String getNome() {
         return nome;
     }
+    public List<Double> getNotas() {
+        return notas;
+    }
     public void registrarNotas(double... notas) throws NotaInvalidaException {
         for (double nota : notas) {
             if (nota < 0.0 || nota > 10.0) throw new NotaInvalidaException("Nota invalida!");

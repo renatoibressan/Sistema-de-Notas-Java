@@ -1,17 +1,111 @@
 package app;
 import model.Aluno;
 import service.GerenciadorAlunos;
-import io.*;
-import exceptions.*;
+// import io.*;
+import exceptions.AlunoNaoEncontradoException;
+import exceptions.DivisaoPorZeroException;
+// import exceptions.ArquivoInvalidoException;
 import java.util.Scanner;
 import java.util.Locale;
 
 public class SistemaNotas {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
-        PersistenciaAlunos arq = new ArquivoAlunos();
-        Aluno aluno;
-        char option = 'X';
+        Aluno a;
+        GerenciadorAlunos gerenciador;
+        // PersistenciaAlunos arq = new ArquivoAlunos();
+        int opcao = -1, matricula = 0;
+        double nota = 10.1, media;
+        String nomeTeste;
+        String load = "...";
+        gerenciador = new GerenciadorAlunos(matricula);
+        while (opcao != 0) {
+            System.out.println("\n====== SISTEMA GERENCIADOR DE NOTAS E ALUNOS ======\n");
+            System.out.println("Desenvolvido por: Renato Ikeda Bressan\n");
+            System.out.println("Opcoes:\n1. Cadastrar aluno\n2. Registrar notas\n3. Listar alunos\n");
+            System.out.println("4. Buscar aluno\n5. Salvar em arquivo\n6. Carregar de arquivo\n0. Sair do programa\n");
+            System.out.print("Insira uma das opcoes acima: ");
+            opcao = sc.nextInt();
+            switch (opcao) {
+                case 1:
+                    System.out.print("\nInsira um nome para cadastro: ");
+                    sc.nextLine();
+                    nomeTeste = sc.nextLine();
+                    gerenciador.cadastrarAluno(nomeTeste);
+                    break;
+                case 2:
+                    System.out.print("Entre com uma matricula para procura do aluno: ");
+                    matricula = sc.nextInt();
+                    try {
+                        System.out.print("Insira uma nota de 0 a 10: ");
+                        while (nota != -1.0 && (nota < 0.0 || nota > 10.0)) {
+                            nota = Double.parseDouble(sc.nextLine());
+                            if (nota != -1.0 && (nota < 0.0 || nota > 10.0)) {
+                                System.out.println("Nota invalida!\n");
+                                System.out.print("Por favor, tente novamente: ");
+                            } else if (nota == -1.0) {
+                                break;
+                            } else {
+                                gerenciador.registrarNotas(matricula, nota);
+                            }
+                        }
+                    } catch (AlunoNaoEncontradoException e) {
+                        System.out.println("\n" + e.getMessage() + "\n");
+                    }
+                    break;
+                case 3:
+                    System.out.println("\nAlunos listados:\n");
+                    gerenciador.listarAlunos();
+                    break;
+                case 4:
+                    System.out.print("Entre com uma matricula para procura do aluno: ");
+                    matricula = sc.nextInt();
+                    try {
+                        a = gerenciador.buscarAluno(matricula);
+                        System.out.println("Aluno encontrado!\n");
+                        System.out.println("Dados do aluno:\nNome: " + a.getNome());
+                        System.out.println("Matricula: " + a.getMatricula());
+                        System.out.println("Notas:");
+                        for (double n : a.getNotas()) {
+                            System.out.print(String.format("%.2f", n) + " ");
+                        }
+                        System.out.print("\n");
+                        try {
+                            media = a.calcularMedia();
+                            System.out.println("Media: " + String.format("%.2f", media));
+                        } catch (DivisaoPorZeroException ee) {
+                            System.out.println("\n" + ee.getMessage() + "\n");
+                        }
+                    } catch (AlunoNaoEncontradoException e) {
+                        System.out.println("\n" + e.getMessage() + "\n");
+                    }
+                    break;
+                // case 5:
+                //     break;
+                // case 6:
+                //     break;
+                case 0:
+                    System.out.print("Encerrando o programa");
+                    Thread.sleep(750);
+                    for (char c : load.toCharArray()) {
+                        System.out.print(c);
+                        Thread.sleep(150);
+                    }
+                    System.out.print("\n");
+                    break;
+                default:
+                    System.out.println("Opcao invalida!\n");
+                    sc.nextLine();
+                    System.out.print("Retornando ao menu do programa principal");
+                    Thread.sleep(750);
+                    for (char c : load.toCharArray()) {
+                        System.out.print(c);
+                        Thread.sleep(150);
+                    }
+                    System.out.print("\n");
+            }
+        }
+        sc.close();
     }
 }

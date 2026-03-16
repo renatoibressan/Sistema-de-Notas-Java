@@ -2,13 +2,18 @@ package service;
 import model.Aluno;
 import exceptions.AlunoNaoEncontradoException;
 import exceptions.NotaInvalidaException;
+import exceptions.DivisaoPorZeroException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.time.LocalDate;
 
 public class GerenciadorAlunos {
     private HashMap<Integer, Aluno> alunos;
     private int ultimaMatricula;
     private int anoAtual;
+    private double media;
     public GerenciadorAlunos(int ultimaMatriculaInicial) {
         alunos = new HashMap<>();
         ultimaMatricula = ultimaMatriculaInicial;
@@ -36,7 +41,7 @@ public class GerenciadorAlunos {
         try {
             aluno.registrarNotas(notas);
         } catch (NotaInvalidaException e) {
-            System.out.println(e.getMessage());
+            System.out.println("\n" + e.getMessage() + "\n");
         }
     }
     public Aluno buscarAluno(int matricula) throws AlunoNaoEncontradoException {
@@ -45,5 +50,21 @@ public class GerenciadorAlunos {
         else return aluno;
     }
     public void listarAlunos() {
+        List<Aluno> listaOrdenada = new ArrayList<>(alunos.values());
+        Collections.sort(listaOrdenada);
+        for (Aluno aluno : listaOrdenada) {
+            System.out.println("Nome do aluno: " + aluno.getNome());
+            System.out.println("matricula do aluno: " + aluno.getMatricula());
+            System.out.println("Notas do aluno: ");
+            for (double nota : aluno.getNotas()) {
+                System.out.print(String.format("%.2f", nota) + " ");
+            }
+            try {
+                media = aluno.calcularMedia();
+                System.out.println("\nMedia: " + String.format("%.2f", media));
+            } catch (DivisaoPorZeroException e) {
+                 System.out.println("\n" + e.getMessage() + "\n");
+            }
+        }
     }
 }
