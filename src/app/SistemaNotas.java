@@ -3,7 +3,6 @@ import model.Aluno;
 import service.GerenciadorAlunos;
 // import io.*;
 import exceptions.AlunoNaoEncontradoException;
-import exceptions.NotaInvalidaException;
 import exceptions.DivisaoPorZeroException;
 // import exceptions.ArquivoInvalidoException;
 import java.util.Scanner;
