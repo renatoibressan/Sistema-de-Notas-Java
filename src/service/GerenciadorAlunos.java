@@ -29,10 +29,11 @@ public class GerenciadorAlunos {
         ultimaMatricula = novaMatricula;
         return novaMatricula;
     }
-    public void cadastrarAluno(String nome) {
+    public Aluno cadastrarAluno(String nome) {
         int matricula = gerarMatricula();
         Aluno aluno = new Aluno(nome, matricula);
         alunos.put(matricula, aluno);
+        return aluno;
     }
     // public void registrarNotas(int matricula, double... notas) throws AlunoNaoEncontradoException {
     //     Aluno aluno = alunos.get(matricula);

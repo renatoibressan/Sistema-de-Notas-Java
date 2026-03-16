@@ -38,7 +38,8 @@ public class SistemaNotas {
                     System.out.print("\nInsira um nome para cadastro: ");
                     sc.nextLine();
                     nomeTeste = sc.nextLine();
-                    gerenciador.cadastrarAluno(nomeTeste);
+                    Aluno aluno = gerenciador.cadastrarAluno(nomeTeste);
+                    System.out.println("\nAluno cadastrado!" + "\nNome: " + aluno.getNome() + "\nMatricula: " + aluno.getMatricula());
                     break;
                 case 2:
                     System.out.print("\nEntre com uma matricula para procura do aluno: ");
