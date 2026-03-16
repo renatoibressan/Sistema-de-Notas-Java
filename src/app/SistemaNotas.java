@@ -5,7 +5,6 @@ import io.*;
 import exceptions.AlunoNaoEncontradoException;
 import exceptions.DivisaoPorZeroException;
 import exceptions.NotaInvalidaException;
-// import exceptions.ArquivoInvalidoException;
 import java.util.Scanner;
 import java.util.Locale;
 import java.io.IOException;
@@ -19,6 +18,7 @@ public class SistemaNotas {
         int opcao = -1, matricula = 0;
         double nota = 10.1, media;
         String nomeTeste;
+        String nomeArquivo = "alunos_" + System.currentTimeMillis() + ".txt";
         String load = "...";
         gerenciador = new GerenciadorAlunos(matricula);
         System.out.println("\n====== SISTEMA GERENCIADOR DE NOTAS E ALUNOS ======\n");
@@ -86,10 +86,7 @@ public class SistemaNotas {
                     }
                     break;
                 case 5:
-                    System.out.print("\nInsira um nome para o arquivo: ");
-                    sc.nextLine();
-                    nomeTeste = sc.nextLine();
-                    arquivo = new ArquivoAlunos(nomeTeste);
+                    arquivo = new ArquivoAlunos(nomeArquivo);
                     try {
                         arquivo.salvarNoArquivo(gerenciador);
                         System.out.println("\nArquivo criado com sucesso!");
@@ -97,8 +94,14 @@ public class SistemaNotas {
                         System.out.println("\nNao foi possivel escrever no arquivo!");
                     }
                     break;
-                // case 6:
-                //     break;
+                case 6:
+                    arquivo = new ArquivoAlunos(nomeArquivo);
+                    try {
+                        arquivo.carregarDeArquivo(gerenciador);
+                    } catch (IOException e) {
+                        System.out.println("\nNao foi possivel ler do arquivo!");
+                    }
+                    break;
                 case 0:
                     System.out.print("\nEncerrando o programa");
                     Thread.sleep(750);

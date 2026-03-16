@@ -21,7 +21,10 @@ public class GerenciadorAlunos {
     public int getUltimaMatricula() {
         return ultimaMatricula;
     }
-    public void adicionarAluno(Aluno aluno) {
+    public void setUltimaMatricula(int ultimaMatricula) {
+        this.ultimaMatricula = ultimaMatricula;
+    }
+    public void inserirAlunoExistente(Aluno aluno) {
         alunos.put(aluno.getMatricula(), aluno);
     }
     public int gerarMatricula() {

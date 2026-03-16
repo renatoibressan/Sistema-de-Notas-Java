@@ -1,8 +1,7 @@
 package io;
 import model.Aluno;
 import service.GerenciadorAlunos;
-import io.PersistenciaAlunos;
-import exceptions.ArquivoInvalidoException;
+import exceptions.NotaInvalidaException;
 import java.util.Map;
 import java.io.*;
 
@@ -31,11 +30,43 @@ public class ArquivoAlunos implements PersistenciaAlunos {
         }
     }
     @Override
-    public void carregarDeArquivo(GerenciadorAlunos gerenciadorAlunos) throws IOException, ArquivoInvalidoException {
+    public void carregarDeArquivo(GerenciadorAlunos gerenciador) throws IOException {
         File arquivo = new File(caminhoArquivo);
         if (!arquivo.exists()) return;
-        BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo));
-        reader.close();
-        throw new ArquivoInvalidoException("Arquivo invalido!");
+        int maiorMatricula = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+            int linhaNumero = 0;
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                linhaNumero++;
+                try {
+                    String[] partes = linha.split(" \\| ");
+                    if (partes.length != 3) throw new IllegalArgumentException("Formato invalido!");
+                    int matricula = Integer.parseInt(partes[0]);
+                    String nome = partes[1];
+                    String stringNotas = partes[2];
+                    Aluno aluno = new Aluno(nome, matricula);
+                    if (!stringNotas.isEmpty()) {
+                        String[] strNotasArray = stringNotas.split("; ");
+                        boolean alunoValido = true;
+                        for (String strNotas : strNotasArray) {
+                            double nota = Double.parseDouble(strNotas);
+                            try {
+                                aluno.registrarNotas(nota);
+                            } catch (NotaInvalidaException e) {
+                                System.out.println("\n" + e.getMessage());
+                                alunoValido = false;
+                                break;
+                            }
+                        }
+                        if (alunoValido) gerenciador.inserirAlunoExistente(aluno);
+                    }
+                    if (matricula > maiorMatricula) maiorMatricula = matricula;
+                } catch (Exception  e) {
+                    System.out.println("\nErro na linha " + linhaNumero + ": " + linha);
+                }
+            }
+        }
+        gerenciador.setUltimaMatricula(maiorMatricula);
     }
 }
