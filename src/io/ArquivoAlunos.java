@@ -1,9 +1,7 @@
 package io;
 import model.Aluno;
-import service.GerenciadorAlunos;
 import io.PersistenciaAlunos;
 import exceptions.ArquivoInvalidoException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
