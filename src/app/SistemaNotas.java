@@ -3,6 +3,7 @@ import model.Aluno;
 import service.GerenciadorAlunos;
 // import io.*;
 import exceptions.AlunoNaoEncontradoException;
+import exceptions.NotaInvalidaException;
 import exceptions.DivisaoPorZeroException;
 // import exceptions.ArquivoInvalidoException;
 import java.util.Scanner;
@@ -25,9 +26,9 @@ public class SistemaNotas {
         String load = "...";
         gerenciador = new GerenciadorAlunos(matricula);
         System.out.println("\n====== SISTEMA GERENCIADOR DE NOTAS E ALUNOS ======\n");
-        System.out.println("Desenvolvido por: Renato Ikeda Bressan\n");
+        System.out.println("Desenvolvido por: Renato Ikeda Bressan");
         while (opcao != 0) {
-            System.out.println("Opcoes:\n1. Cadastrar aluno\n2. Registrar notas\n3. Listar alunos");
+            System.out.println("\nOpcoes:\n1. Cadastrar aluno\n2. Registrar notas\n3. Listar alunos");
             System.out.println("4. Buscar aluno\n5. Salvar em arquivo\n6. Carregar de arquivo\n0. Sair do programa\n");
             System.out.print("Insira uma das opcoes acima: ");
             opcao = sc.nextInt();
@@ -42,17 +43,13 @@ public class SistemaNotas {
                     System.out.print("\nEntre com uma matricula para procura do aluno: ");
                     matricula = sc.nextInt();
                     try {
-                        System.out.print("Insira uma nota de 0 a 10: ");
-                        while ((nota < 0.0 || nota > 10.0)) {
+                        while (true) {
+                            System.out.print("Insira uma nota de 0 a 10 (ou -1 para encerrar o processo): ");
                             nota = sc.nextDouble();
-                            if (nota != -1.0 && (nota < 0.0 || nota > 10.0)) {
-                                System.out.println("Nota invalida!\n");
-                                System.out.print("Por favor, tente novamente: ");
-                            } else if (nota == -1.0) {
+                            if (nota == -1.0) {
                                 break;
-                            } else {
-                                gerenciador.registrarNotas(matricula, nota);
                             }
+                            gerenciador.registrarNotas(matricula, nota);
                         }
                     } catch (AlunoNaoEncontradoException e) {
                         System.out.println("\n" + e.getMessage() + "\n");
