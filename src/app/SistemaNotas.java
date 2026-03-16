@@ -11,10 +11,6 @@ import java.util.Locale;
 import java.io.IOException;
 
 public class SistemaNotas {
-    public static void limparTela() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
     public static void main(String[] args) throws InterruptedException {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
@@ -25,7 +21,6 @@ public class SistemaNotas {
         String nomeTeste;
         String load = "...";
         gerenciador = new GerenciadorAlunos(matricula);
-        limparTela();
         System.out.println("\n====== SISTEMA GERENCIADOR DE NOTAS E ALUNOS ======\n");
         System.out.println("Desenvolvido por: Renato Ikeda Bressan");
         while (opcao != 0) {
