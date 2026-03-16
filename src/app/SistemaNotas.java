@@ -58,13 +58,13 @@ public class SistemaNotas {
                                 System.out.println("\n" + ee.getMessage() + "\n");
                             }
                         }
-                        System.out.println("\nNotas de " + a.getNome() + " cadastradas com sucesso");
+                        System.out.println("\nNotas de " + a.getNome() + " cadastradas com sucesso!");
                     } catch (AlunoNaoEncontradoException e) {
                         System.out.println("\n" + e.getMessage() + "\n");
                     }
                     break;
                 case 3:
-                    System.out.println("\nAlunos listados:\n");
+                    System.out.println("\nAlunos listados:");
                     gerenciador.listarAlunos();
                     break;
                 case 4:
