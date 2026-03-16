@@ -23,7 +23,7 @@ public class SistemaNotas {
         while (opcao != 0) {
             System.out.println("\n====== SISTEMA GERENCIADOR DE NOTAS E ALUNOS ======\n");
             System.out.println("Desenvolvido por: Renato Ikeda Bressan\n");
-            System.out.println("Opcoes:\n1. Cadastrar aluno\n2. Registrar notas\n3. Listar alunos\n");
+            System.out.println("Opcoes:\n1. Cadastrar aluno\n2. Registrar notas\n3. Listar alunos");
             System.out.println("4. Buscar aluno\n5. Salvar em arquivo\n6. Carregar de arquivo\n0. Sair do programa\n");
             System.out.print("Insira uma das opcoes acima: ");
             opcao = sc.nextInt();
