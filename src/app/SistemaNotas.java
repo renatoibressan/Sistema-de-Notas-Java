@@ -58,6 +58,7 @@ public class SistemaNotas {
                                 System.out.println("\n" + ee.getMessage() + "\n");
                             }
                         }
+                        System.out.println("\nNotas de " + a.getNome() + " cadastradas com sucesso");
                     } catch (AlunoNaoEncontradoException e) {
                         System.out.println("\n" + e.getMessage() + "\n");
                     }

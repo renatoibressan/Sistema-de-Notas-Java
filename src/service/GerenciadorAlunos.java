@@ -55,7 +55,7 @@ public class GerenciadorAlunos {
         List<Aluno> listaOrdenada = new ArrayList<>(alunos.values());
         Collections.sort(listaOrdenada);
         for (Aluno aluno : listaOrdenada) {
-            System.out.println("Nome do aluno: " + aluno.getNome());
+            System.out.println("\nNome do aluno: " + aluno.getNome());
             System.out.println("matricula do aluno: " + aluno.getMatricula());
             System.out.println("Notas do aluno: ");
             for (double nota : aluno.getNotas()) {
