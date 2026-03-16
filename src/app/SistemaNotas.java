@@ -35,12 +35,12 @@ public class SistemaNotas {
                     gerenciador.cadastrarAluno(nomeTeste);
                     break;
                 case 2:
-                    System.out.print("Entre com uma matricula para procura do aluno: ");
+                    System.out.print("\nEntre com uma matricula para procura do aluno: ");
                     matricula = sc.nextInt();
                     try {
                         System.out.print("Insira uma nota de 0 a 10: ");
                         while (nota != -1.0 && (nota < 0.0 || nota > 10.0)) {
-                            nota = Double.parseDouble(sc.nextLine());
+                            nota = sc.nextDouble();
                             if (nota != -1.0 && (nota < 0.0 || nota > 10.0)) {
                                 System.out.println("Nota invalida!\n");
                                 System.out.print("Por favor, tente novamente: ");
@@ -59,7 +59,7 @@ public class SistemaNotas {
                     gerenciador.listarAlunos();
                     break;
                 case 4:
-                    System.out.print("Entre com uma matricula para procura do aluno: ");
+                    System.out.print("\nEntre com uma matricula para procura do aluno: ");
                     matricula = sc.nextInt();
                     try {
                         a = gerenciador.buscarAluno(matricula);
@@ -86,7 +86,7 @@ public class SistemaNotas {
                 // case 6:
                 //     break;
                 case 0:
-                    System.out.print("Encerrando o programa");
+                    System.out.print("\nEncerrando o programa");
                     Thread.sleep(750);
                     for (char c : load.toCharArray()) {
                         System.out.print(c);
@@ -95,7 +95,7 @@ public class SistemaNotas {
                     System.out.print("\n");
                     break;
                 default:
-                    System.out.println("Opcao invalida!\n");
+                    System.out.println("\nOpcao invalida!\n");
                     sc.nextLine();
                     System.out.print("Retornando ao menu do programa principal");
                     Thread.sleep(750);
