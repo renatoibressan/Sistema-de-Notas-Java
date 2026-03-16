@@ -45,17 +45,6 @@ public class GerenciadorAlunos {
         alunos.put(matricula, aluno);
         return aluno;
     }
-    // public void registrarNotas(int matricula, double... notas) throws AlunoNaoEncontradoException {
-    //     Aluno aluno = alunos.get(matricula);
-    //     if (aluno == null) throw new AlunoNaoEncontradoException("Aluno nao encontrado!");
-    //     else {
-    //         try {
-    //             aluno.registrarNotas(notas);
-    //         } catch (NotaInvalidaException e) {
-    //             System.out.println("\n" + e.getMessage());
-    //         }
-    //     }
-    // }
     public Aluno buscarAluno(int matricula) throws AlunoNaoEncontradoException {
         Aluno aluno = alunos.get(matricula);
         if (aluno == null) throw new AlunoNaoEncontradoException("Aluno nao encontrado!");

@@ -7,7 +7,7 @@ import exceptions.DivisaoPorZeroException;
 import exceptions.NotaInvalidaException;
 import java.util.Scanner;
 import java.util.Locale;
-import java.io.IOException;
+import java.io.*;
 
 public class SistemaNotas {
     public static void main(String[] args) throws InterruptedException {
@@ -17,12 +17,26 @@ public class SistemaNotas {
         PersistenciaAlunos arquivo;
         int opcao = -1, matricula = 0;
         double nota = 10.1, media;
-        String nomeTeste;
+        String nomeTeste, resposta;
         String nomeArquivo = "alunos.txt";
         String load = "...";
         gerenciador = new GerenciadorAlunos(matricula);
         System.out.println("\n====== SISTEMA GERENCIADOR DE NOTAS E ALUNOS ======\n");
         System.out.println("Desenvolvido por: Renato Ikeda Bressan");
+        PersistenciaAlunos arquivoMenu = new ArquivoAlunos(nomeArquivo);
+        File file = new File(nomeArquivo);
+        if (file.exists() && file.length() > 0) {
+            System.out.print("Deseja carregar os alunos do arquivo 'alunos.txt'? (S/N): ");
+            resposta = sc.nextLine();
+            if (resposta.equalsIgnoreCase("s")) {
+                try {
+                    arquivoMenu.carregarDeArquivo(gerenciador);
+                    System.out.println("\nDados de alunos carregados com sucesso!");
+                } catch (IOException e) {
+                    System.out.println("\nErro ao carregar os dados do arquivo!");
+                }
+            }
+        }
         while (opcao != 0) {
             System.out.println("\nOpcoes:\n1. Cadastrar aluno\n2. Registrar notas\n3. Listar alunos");
             System.out.println("4. Buscar aluno\n5. Salvar em arquivo\n6. Carregar de arquivo\n0. Sair do programa\n");
@@ -104,7 +118,7 @@ public class SistemaNotas {
                     }
                     break;
                 case 0:
-                    System.out.print("\nEncerrando o programa");
+                    System.out.print("\nRetornando ao inicio");
                     Thread.sleep(750);
                     for (char c : load.toCharArray()) {
                         System.out.print(c);
@@ -124,6 +138,25 @@ public class SistemaNotas {
                     System.out.print("\n");
             }
         }
+        System.out.print("\nDeseja salvar os alunos no arquivo 'alunos.txt' antes de sair? (S/N): ");
+        sc.nextLine();
+        resposta = sc.nextLine();
+        if (resposta.equalsIgnoreCase("s")) {
+            try {
+                arquivoMenu.salvarNoArquivo(gerenciador);
+                System.out.println("\nDados de alunos salvos com sucesso!");
+            } catch (IOException e) {
+                System.out.println("\nErro ao salvar os dados no arquivo!");
+            }
+        }
+        Thread.sleep(750);
+        System.out.print("\nEncerrando o programa");
+        Thread.sleep(750);
+        for (char c : load.toCharArray()) {
+            System.out.print(c);
+            Thread.sleep(150);
+        }
+        System.out.println("\n");
         sc.close();
     }
 }
