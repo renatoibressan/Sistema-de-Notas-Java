@@ -5,7 +5,6 @@ import service.GerenciadorAlunos;
 import exceptions.AlunoNaoEncontradoException;
 import exceptions.DivisaoPorZeroException;
 import exceptions.NotaInvalidaException;
-
 // import exceptions.ArquivoInvalidoException;
 import java.util.Scanner;
 import java.util.Locale;

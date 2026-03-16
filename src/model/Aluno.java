@@ -1,6 +1,6 @@
 package model;
-import exceptions.NotaInvalidaException;
 import exceptions.DivisaoPorZeroException;
+import exceptions.NotaInvalidaException;
 import java.util.ArrayList;
 import java.util.List;
 
