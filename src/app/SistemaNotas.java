@@ -9,6 +9,10 @@ import java.util.Scanner;
 import java.util.Locale;
 
 public class SistemaNotas {
+    public static void limparTela() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
     public static void main(String[] args) throws InterruptedException {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
@@ -20,9 +24,9 @@ public class SistemaNotas {
         String nomeTeste;
         String load = "...";
         gerenciador = new GerenciadorAlunos(matricula);
+        System.out.println("\n====== SISTEMA GERENCIADOR DE NOTAS E ALUNOS ======\n");
+        System.out.println("Desenvolvido por: Renato Ikeda Bressan\n");
         while (opcao != 0) {
-            System.out.println("\n====== SISTEMA GERENCIADOR DE NOTAS E ALUNOS ======\n");
-            System.out.println("Desenvolvido por: Renato Ikeda Bressan\n");
             System.out.println("Opcoes:\n1. Cadastrar aluno\n2. Registrar notas\n3. Listar alunos");
             System.out.println("4. Buscar aluno\n5. Salvar em arquivo\n6. Carregar de arquivo\n0. Sair do programa\n");
             System.out.print("Insira uma das opcoes acima: ");
@@ -39,7 +43,7 @@ public class SistemaNotas {
                     matricula = sc.nextInt();
                     try {
                         System.out.print("Insira uma nota de 0 a 10: ");
-                        while (nota != -1.0 && (nota < 0.0 || nota > 10.0)) {
+                        while ((nota < 0.0 || nota > 10.0)) {
                             nota = sc.nextDouble();
                             if (nota != -1.0 && (nota < 0.0 || nota > 10.0)) {
                                 System.out.println("Nota invalida!\n");
